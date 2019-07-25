@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script src="./js/jquery.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script> -->
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script> -->
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script> -->
+       <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script> -->
+       <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script> -->
+       <script type="text/javascript">
+       var geoCoordMap = {
+    "海门":[121.15,31.89],
+    "鄂尔多斯":[109.781327,39.608266],
+    "招远":[120.38,37.35],
+    "舟山":[122.207216,29.985295],
+    "齐齐哈尔":[123.97,47.33],
+    "盐城":[120.13,33.38],
+    "赤峰":[118.87,42.28],
+    "青岛":[120.33,36.07],
+    "乳山":[121.52,36.89],
+    "金昌":[102.188043,38.520089],
+    "泉州":[118.58,24.93],
+    "莱西":[120.53,36.86],
+    "日照":[119.46,35.42],
+    "胶南":[119.97,35.88],
+    "南通":[121.05,32.08],
+    "拉萨":[91.11,29.97],
+    "云浮":[112.02,22.93],
+    "梅州":[116.1,24.55],
+    "文登":[122.05,37.2],
+    "上海":[121.48,31.22],
+    "攀枝花":[101.718637,26.582347],
+    "威海":[122.1,37.5],
+    "承德":[117.93,40.97],
+    "厦门":[118.1,24.46],
+    "汕尾":[115.375279,22.786211],
+    "潮州":[116.63,23.68],
+    "丹东":[124.37,40.13],
+    "太仓":[121.1,31.45],
+    "曲靖":[103.79,25.51],
+    "烟台":[121.39,37.52],
+    "福州":[119.3,26.08],
+    "瓦房店":[121.979603,39.627114],
+    "即墨":[120.45,36.38],
+    "抚顺":[123.97,41.97],
+    "玉溪":[102.52,24.35],
+    "张家口":[114.87,40.82],
+    "阳泉":[113.57,37.85],
+    "莱州":[119.942327,37.177017],
+    "湖州":[120.1,30.86],
+    "汕头":[116.69,23.39],
+    "昆山":[120.95,31.39],
+    "宁波":[121.56,29.86],
+    "湛江":[110.359377,21.270708],
+    "揭阳":[116.35,23.55],
+    "荣成":[122.41,37.16],
+    "连云港":[119.16,34.59],
+    "葫芦岛":[120.836932,40.711052],
+    "常熟":[120.74,31.64],
+    "东莞":[113.75,23.04],
+    "河源":[114.68,23.73],
+    "淮安":[119.15,33.5],
+    "泰州":[119.9,32.49],
+    "南宁":[108.33,22.84],
+    "营口":[122.18,40.65],
+    "惠州":[114.4,23.09],
+    "江阴":[120.26,31.91],
+    "蓬莱":[120.75,37.8],
+    "韶关":[113.62,24.84],
+    "嘉峪关":[98.289152,39.77313],
+    "广州":[113.23,23.16],
+    "延安":[109.47,36.6],
+    "太原":[112.53,37.87],
+    "清远":[113.01,23.7],
+    "中山":[113.38,22.52],
+    "昆明":[102.73,25.04],
+    "寿光":[118.73,36.86],
+    "盘锦":[122.070714,41.119997],
+    "长治":[113.08,36.18],
+    "深圳":[114.07,22.62],
+    "珠海":[113.52,22.3],
+    "宿迁":[118.3,33.96],
+    "咸阳":[108.72,34.36],
+    "铜川":[109.11,35.09],
+    "平度":[119.97,36.77],
+    "佛山":[113.11,23.05],
+    "海口":[110.35,20.02],
+    "江门":[113.06,22.61],
+    "章丘":[117.53,36.72],
+    "肇庆":[112.44,23.05],
+    "大连":[121.62,38.92],
+    "临汾":[111.5,36.08],
+    "吴江":[120.63,31.16],
+    "石嘴山":[106.39,39.04],
+    "沈阳":[123.38,41.8],
+    "苏州":[120.62,31.32],
+    "茂名":[110.88,21.68],
+    "嘉兴":[120.76,30.77],
+    "长春":[125.35,43.88],
+    "胶州":[120.03336,36.264622],
+    "银川":[106.27,38.47],
+    "张家港":[120.555821,31.875428],
+    "三门峡":[111.19,34.76],
+    "锦州":[121.15,41.13],
+    "南昌":[115.89,28.68],
+    "柳州":[109.4,24.33],
+    "三亚":[109.511909,18.252847],
+    "自贡":[104.778442,29.33903],
+    "吉林":[126.57,43.87],
+    "阳江":[111.95,21.85],
+    "泸州":[105.39,28.91],
+    "西宁":[101.74,36.56],
+    "宜宾":[104.56,29.77],
+    "呼和浩特":[111.65,40.82],
+    "成都":[104.06,30.67],
+    "大同":[113.3,40.12],
+    "镇江":[119.44,32.2],
+    "桂林":[110.28,25.29],
+    "张家界":[110.479191,29.117096],
+    "宜兴":[119.82,31.36],
+    "北海":[109.12,21.49],
+    "西安":[108.95,34.27],
+    "金坛":[119.56,31.74],
+    "东营":[118.49,37.46],
+    "牡丹江":[129.58,44.6],
+    "遵义":[106.9,27.7],
+    "绍兴":[120.58,30.01],
+    "扬州":[119.42,32.39],
+    "常州":[119.95,31.79],
+    "潍坊":[119.1,36.62],
+    "重庆":[106.54,29.59],
+    "台州":[121.420757,28.656386],
+    "南京":[118.78,32.04],
+    "滨州":[118.03,37.36],
+    "贵阳":[106.71,26.57],
+    "无锡":[120.29,31.59],
+    "本溪":[123.73,41.3],
+    "克拉玛依":[84.77,45.59],
+    "渭南":[109.5,34.52],
+    "马鞍山":[118.48,31.56],
+    "宝鸡":[107.15,34.38],
+    "焦作":[113.21,35.24],
+    "句容":[119.16,31.95],
+    "北京":[116.46,39.92],
+    "徐州":[117.2,34.26],
+    "衡水":[115.72,37.72],
+    "包头":[110,40.58],
+    "绵阳":[104.73,31.48],
+    "乌鲁木齐":[87.68,43.77],
+    "枣庄":[117.57,34.86],
+    "杭州":[120.19,30.26],
+    "淄博":[118.05,36.78],
+    "鞍山":[122.85,41.12],
+    "溧阳":[119.48,31.43],
+    "库尔勒":[86.06,41.68],
+    "安阳":[114.35,36.1],
+    "开封":[114.35,34.79],
+    "济南":[117,36.65],
+    "德阳":[104.37,31.13],
+    "温州":[120.65,28.01],
+    "九江":[115.97,29.71],
+    "邯郸":[114.47,36.6],
+    "临安":[119.72,30.23],
+    "兰州":[103.73,36.03],
+    "沧州":[116.83,38.33],
+    "临沂":[118.35,35.05],
+    "南充":[106.110698,30.837793],
+    "天津":[117.2,39.13],
+    "富阳":[119.95,30.07],
+    "泰安":[117.13,36.18],
+    "诸暨":[120.23,29.71],
+    "郑州":[113.65,34.76],
+    "哈尔滨":[126.63,45.75],
+    "聊城":[115.97,36.45],
+    "芜湖":[118.38,31.33],
+    "唐山":[118.02,39.63],
+    "平顶山":[113.29,33.75],
+    "邢台":[114.48,37.05],
+    "德州":[116.29,37.45],
+    "济宁":[116.59,35.38],
+    "荆州":[112.239741,30.335165],
+    "宜昌":[111.3,30.7],
+    "义乌":[120.06,29.32],
+    "丽水":[119.92,28.45],
+    "洛阳":[112.44,34.7],
+    "秦皇岛":[119.57,39.95],
+    "株洲":[113.16,27.83],
+    "石家庄":[114.48,38.03],
+    "莱芜":[117.67,36.19],
+    "常德":[111.69,29.05],
+    "保定":[115.48,38.85],
+    "湘潭":[112.91,27.87],
+    "金华":[119.64,29.12],
+    "岳阳":[113.09,29.37],
+    "长沙":[113,28.21],
+    "衢州":[118.88,28.97],
+    "廊坊":[116.7,39.53],
+    "菏泽":[115.480656,35.23375],
+    "合肥":[117.27,31.86],
+    "武汉":[114.31,30.52],
+    "大庆":[125.03,46.58]
+};
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var tempdata = [{'person':'马腾浩','prov':'北京','city':'北京','school':'中国矿业大学'},
+                {'person':'杨若琳','prov':'北京','city':'北京','school':'中国矿业大学'},
+                {'person':'罗怡宁','prov':'福建','city':'厦门','school':'华侨大学'},
+                {'person':'陈文轩','prov':'河北','city':'保定','school':'河北大学'},
+                {'person':'崔敬佩','prov':'河北','city':'保定','school':'河北大学'},
+                {'person':'高源','prov':'河北','city':'保定','school':'河北农业大学'},
+                {'person':'刘昕恬','prov':'河北','city':'沧州','school':'河北农业大学（渤海校区）'},
+                {'person':'康家璇','prov':'河北','city':'秦皇岛','school':'燕山大学'},
+                {'person':'石磊','prov':'河北','city':'秦皇岛','school':'燕山大学'},
+                {'person':'陈卓','prov':'河北','city':'石家庄','school':'河北科技大学'},
+                {'person':'申畅','prov':'河北','city':'石家庄','school':'河北经贸大学'},
+                {'person':'王沛霖','prov':'河北','city':'石家庄','school':'河北地质大学'},
+                {'person':'朱新宇','prov':'河北','city':'唐山','school':'华北理工大学'},
+                {'person':'齐子晗','prov':'河北','city':'张家口','school':'河北建筑工程学院'},
+                {'person':'马云鹏','prov':'黑龙江','city':'哈尔滨','school':'哈尔滨工程大学'},
+                {'person':'高子坤','prov':'湖北','city':'武汉','school':'武汉理工大学'},
+                {'person':'王德贤','prov':'湖南','city':'湘潭','school':'湘潭大学'},
+                {'person':'任朔璞','prov':'吉林','city':'长春','school':'吉林大学'},
+                {'person':'安梦轩','prov':'江苏','city':'南京','school':'南京信息工程大学'},
+                {'person':'崔慧超','prov':'江苏','city':'南京','school':'陆军工程大学'},
+                {'person':'辛泽生','prov':'江苏','city':'镇江','school':'江苏大学'},
+                {'person':'李朱皓','prov':'辽宁','city':'大连','school':'大连理工大学'},
+                {'person':'张楚杭','prov':'辽宁','city':'大连','school':'大连海事大学'},
+                {'person':'崔明英','prov':'山东','city':'济南','school':'山东大学'},
+                {'person':'李思语','prov':'山东','city':'威海','school':'北京交通大学（威海校区）'},
+                {'person':'史昊炜','prov':'陕西','city':'西安','school':'西安电子科技大学'},
+                {'person':'王家怡','prov':'陕西','city':'西安','school':'西安外国语大学'},
+                {'person':'钱宇航','prov':'上海','city':'上海','school':'华东师范大学'},
+                {'person':'杨圣烨','prov':'上海','city':'上海','school':'上海海事大学'},
+                {'person':'刘晨阳','prov':'天津','city':'天津','school':'河北工业大学'},
+                {'person':'潘雨汐','prov':'天津','city':'天津','school':'河北工业大学'},
+                {'person':'王浩宇','prov':'天津','city':'天津','school':'河北工业大学'},
+                {'person':'武泽林','prov':'天津','city':'天津','school':'河北工业大学'},
+                {'person':'郗悦妍','prov':'天津','city':'天津','school':'河北工业大学'},
+                {'person':'杨鹏宇','prov':'天津','city':'天津','school':'河北工业大学'},
+                {'person':'张洪熙','prov':'天津','city':'天津','school':'河北工业大学'}];
+var citytemp = {};
+var provtemp = {};
+for (var i = 0; i < tempdata.length; i++) {
+    if(!citytemp[tempdata[i].city]){
+        citytemp[tempdata[i].city] = [];
+    }
+    citytemp[tempdata[i].city].push(tempdata[i]);
+    if(!provtemp[tempdata[i].prov]){
+        provtemp[tempdata[i].prov] = [];
+    }
+    provtemp[tempdata[i].prov].push(tempdata[i]);
+}
+var citydata = [];
+var provdata = [];
+for (var key in citytemp) {
+    citydata.push({
+        name: key,
+        value: citytemp[key].length,
+        content:citytemp[key]
+    });
+}
+for (var key in provtemp) {
+    provdata.push({
+        name: key,
+        value: provtemp[key].length,
+        content:provtemp[key]
+    });
+}
+
+function convertData(data) { // 转换数据
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name]; // 数据的名字对应的经纬度
+        if (geoCoord) { // 如果数据data对应上，
+            res.push({
+                name: data[i].name,
+                value: geoCoord,
+                content:data[i].content
+            });
+        }
+    }
+    return res;
+};
+
+var app = {};
+option = null;
+option = {
+    title : {
+        text: '吃饭联系',
+        // subtext: '纯属虚构',
+        left: 'center'
+    },
+    // legend: {
+    //     orient: 'vertical',
+    //     left: 'left',
+    //     data:['iphone3']
+    // },
+    tooltip : {
+        trigger: 'item',
+        // formatter: function (params) {
+        // return params.name + ' : ' + params.value;
+        // }
+    },
+    visualMap: {
+        min: 0,
+        max: 15,
+        left: 'left',
+        top: 'center',
+        text:['高','低'],           // 文本，默认为数值文本
+        calculable : true,
+        seriesIndex: [1],
+    },
+    toolbox: {
+        show: true,
+        orient : 'vertical',
+        left: 'right',
+        top: 'center',
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    geo: {
+        show: true,
+        map: 'china',
+        roam: true,
+        label: {
+            normal: {
+                show: true
+            },
+            emphasis: {
+                show: false,
+            }
+        },
+        itemStyle: {
+            normal: {
+                areaColor: '#eeeeee', // 没有值得时候颜色
+                borderColor: '#097bba',
+            },
+            emphasis: {
+                areaColor: '#fbd456', // 鼠标滑过选中的颜色
+            }
+        }
+    },
+    series : [
+        {
+            name: 'point',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbol: 'pin', //气泡
+            symbolSize: 30,
+            tooltip : {
+                trigger: 'item',
+                formatter: function (params) {
+                    var toolTiphtml = params.name;
+                    for (let index = 0; index < params.data.content.length; index++) {
+                        const el = params.data.content[index];
+                        toolTiphtml += '<br/>' + el.person + ' : ' + el.school
+                    }
+                    return toolTiphtml;
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    formatter: function (params) {
+                        return params.data.content.length;
+                    },
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 9
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'red' //标志颜色'#F62157'
+                }
+            },
+            zlevel: 6,
+            data: convertData(citydata)
+        },
+        {
+            name: '666',
+            type: 'map',
+            // mapType: 'china',
+            geoIndex: 0,
+            tooltip : {
+                trigger: 'item',
+                formatter: function (params) {
+                    if(params.value){
+                        return params.name + '人数 : ' + params.value;
+                    }
+                    return '';
+                }
+            },
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data: provdata
+        }
+    ]
+};
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+    //点击事件,根据点击某个省份计算出这个省份的数据
+    myChart.on('click', function (params) {
+        console.log(params);
+    });
+       </script>
+   </body>
+</html>
