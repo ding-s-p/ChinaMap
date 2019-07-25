@@ -121,6 +121,7 @@
     "宜宾":[104.56,29.77],
     "呼和浩特":[111.65,40.82],
     "成都":[104.06,30.67],
+    "雅安":[102.59,29.59],
     "大同":[113.3,40.12],
     "镇江":[119.44,32.2],
     "桂林":[110.28,25.29],
@@ -211,41 +212,49 @@
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var tempdata = [{'person':'马腾浩','prov':'北京','city':'北京','school':'中国矿业大学'},
-                {'person':'杨若琳','prov':'北京','city':'北京','school':'中国矿业大学'},
-                {'person':'罗怡宁','prov':'福建','city':'厦门','school':'华侨大学'},
-                {'person':'陈文轩','prov':'河北','city':'保定','school':'河北大学'},
-                {'person':'崔敬佩','prov':'河北','city':'保定','school':'河北大学'},
-                {'person':'高源','prov':'河北','city':'保定','school':'河北农业大学'},
-                {'person':'刘昕恬','prov':'河北','city':'沧州','school':'河北农业大学（渤海校区）'},
-                {'person':'康家璇','prov':'河北','city':'秦皇岛','school':'燕山大学'},
-                {'person':'石磊','prov':'河北','city':'秦皇岛','school':'燕山大学'},
-                {'person':'陈卓','prov':'河北','city':'石家庄','school':'河北科技大学'},
-                {'person':'申畅','prov':'河北','city':'石家庄','school':'河北经贸大学'},
-                {'person':'王沛霖','prov':'河北','city':'石家庄','school':'河北地质大学'},
-                {'person':'朱新宇','prov':'河北','city':'唐山','school':'华北理工大学'},
-                {'person':'齐子晗','prov':'河北','city':'张家口','school':'河北建筑工程学院'},
-                {'person':'马云鹏','prov':'黑龙江','city':'哈尔滨','school':'哈尔滨工程大学'},
-                {'person':'高子坤','prov':'湖北','city':'武汉','school':'武汉理工大学'},
-                {'person':'王德贤','prov':'湖南','city':'湘潭','school':'湘潭大学'},
-                {'person':'任朔璞','prov':'吉林','city':'长春','school':'吉林大学'},
-                {'person':'安梦轩','prov':'江苏','city':'南京','school':'南京信息工程大学'},
-                {'person':'崔慧超','prov':'江苏','city':'南京','school':'陆军工程大学'},
-                {'person':'辛泽生','prov':'江苏','city':'镇江','school':'江苏大学'},
-                {'person':'李朱皓','prov':'辽宁','city':'大连','school':'大连理工大学'},
-                {'person':'张楚杭','prov':'辽宁','city':'大连','school':'大连海事大学'},
-                {'person':'崔明英','prov':'山东','city':'济南','school':'山东大学'},
-                {'person':'李思语','prov':'山东','city':'威海','school':'北京交通大学（威海校区）'},
-                {'person':'史昊炜','prov':'陕西','city':'西安','school':'西安电子科技大学'},
-                {'person':'王家怡','prov':'陕西','city':'西安','school':'西安外国语大学'},
-                {'person':'钱宇航','prov':'上海','city':'上海','school':'华东师范大学'},
-                {'person':'杨圣烨','prov':'上海','city':'上海','school':'上海海事大学'},
-                {'person':'刘晨阳','prov':'天津','city':'天津','school':'河北工业大学'},
-                {'person':'潘雨汐','prov':'天津','city':'天津','school':'河北工业大学'},
-                {'person':'王浩宇','prov':'天津','city':'天津','school':'河北工业大学'},
-                {'person':'武泽林','prov':'天津','city':'天津','school':'河北工业大学'},
-                {'person':'郗悦妍','prov':'天津','city':'天津','school':'河北工业大学'},
-                {'person':'杨鹏宇','prov':'天津','city':'天津','school':'河北工业大学'},
-                {'person':'张洪熙','prov':'天津','city':'天津','school':'河北工业大学'}];
+{'person':'杨若琳','prov':'北京','city':'北京','school':'中国矿业大学'},
+{'person':'罗怡宁','prov':'福建','city':'厦门','school':'华侨大学'},
+{'person':'陈文轩','prov':'河北','city':'保定','school':'河北大学'},
+{'person':'崔敬佩','prov':'河北','city':'保定','school':'河北大学'},
+{'person':'冯子琦','prov':'河北','city':'保定','school':'河北农业大学'},
+{'person':'高源','prov':'河北','city':'保定','school':'河北农业大学'},
+{'person':'刘昕恬','prov':'河北','city':'沧州','school':'河北农业大学（渤海校区）'},
+{'person':'康家璇','prov':'河北','city':'秦皇岛','school':'燕山大学'},
+{'person':'石磊','prov':'河北','city':'秦皇岛','school':'燕山大学'},
+{'person':'陈卓','prov':'河北','city':'石家庄','school':'河北科技大学'},
+{'person':'刘宇洋','prov':'河北','city':'石家庄','school':'河北经贸大学'},
+{'person':'申畅','prov':'河北','city':'石家庄','school':'河北经贸大学'},
+{'person':'王沛霖','prov':'河北','city':'石家庄','school':'河北地质大学'},
+{'person':'朱新宇','prov':'河北','city':'唐山','school':'华北理工大学'},
+{'person':'齐子晗','prov':'河北','city':'张家口','school':'河北建筑工程学院'},
+{'person':'马云鹏','prov':'黑龙江','city':'哈尔滨','school':'哈尔滨工程大学'},
+{'person':'高子坤','prov':'湖北','city':'武汉','school':'武汉理工大学'},
+{'person':'王德贤','prov':'湖南','city':'湘潭','school':'湘潭大学'},
+{'person':'任朔璞','prov':'吉林','city':'长春','school':'吉林大学'},
+{'person':'崔慧超','prov':'江苏','city':'南京','school':'陆军工程大学'},
+{'person':'刘宇轩','prov':'江苏','city':'南京','school':'中国药科大学'},
+{'person':'辛泽生','prov':'江苏','city':'镇江','school':'苏州大学'},
+{'person':'李朱皓','prov':'辽宁','city':'大连','school':'大连理工大学'},
+{'person':'张楚杭','prov':'辽宁','city':'大连','school':'大连海事大学'},
+{'person':'郭林卓','prov':'辽宁','city':'锦州','school':'渤海大学'},
+{'person':'安梦轩','prov':'江苏','city':'南京','school':'南京信息工程大学'},
+{'person':'崔明英','prov':'山东','city':'济南','school':'山东大学'},
+{'person':'李思语','prov':'山东','city':'威海','school':'北京交通大学（威海校区）'},
+{'person':'崔箫颖','prov':'山西','city':'太原','school':'太原理工大学'},
+{'person':'史昊炜','prov':'陕西','city':'西安','school':'西安电子科技大学'},
+{'person':'王家怡','prov':'陕西','city':'西安','school':'西安外国语大学'},
+{'person':'钱宇航','prov':'上海','city':'上海','school':'华东师范大学'},
+{'person':'杨圣烨','prov':'上海','city':'上海','school':'上海海事大学'},
+{'person':'闫梦龙','prov':'四川','city':'成都','school':'西南石油大学'},
+{'person':'张鑫然','prov':'四川','city':'雅安','school':'四川农业大学'},
+{'person':'刘晨阳','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'马畅璐','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'潘雨汐','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'王浩宇','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'武泽林','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'郗悦妍','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'杨鹏宇','prov':'天津','city':'天津','school':'河北工业大学'},
+{'person':'张洪熙','prov':'天津','city':'天津','school':'河北工业大学'}];
 var citytemp = {};
 var provtemp = {};
 for (var i = 0; i < tempdata.length; i++) {
@@ -314,6 +323,7 @@ option = {
         max: 15,
         left: 'left',
         top: 'center',
+        zoom: 1.5,
         text:['高','低'],           // 文本，默认为数值文本
         calculable : true,
         seriesIndex: [1],
@@ -334,6 +344,8 @@ option = {
         show: true,
         map: 'china',
         roam: true,
+        // center: [115.97, 29.71],
+        zoom: 1.5,
         label: {
             normal: {
                 show: true
@@ -387,7 +399,7 @@ option = {
                     color: 'red' //标志颜色'#F62157'
                 }
             },
-            zlevel: 6,
+            // zlevel: 6,
             data: convertData(citydata)
         },
         {
@@ -420,9 +432,9 @@ if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }
     //点击事件,根据点击某个省份计算出这个省份的数据
-    myChart.on('click', function (params) {
-        console.log(params);
-    });
+    // myChart.on('click', function (params) {
+    //     console.log(params);
+    // });
        </script>
    </body>
 </html>
